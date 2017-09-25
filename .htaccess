@@ -1,0 +1,23 @@
+AddDefaultCharset UTF-8
+
+ErrorDocument 400 404.html
+ErrorDocument 401 404.html
+ErrorDocument 402 404.html
+ErrorDocument 403 /403.html
+ErrorDocument 404 /404.html
+ErrorDocument 500 /50x.html
+ErrorDocument 501 50x.html
+ErrorDocument 502 50x.html
+
+Options -Indexes
+
+<Files ~ ".htaccess$|.htpasswd$|.log$|.sql$">
+    Order Allow,Deny 
+    Deny From All 
+    Satisfy All 
+</Files>
+
+######################################################
+RewriteEngine On
+RewriteCond %{ENV:HTTPS} !on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
